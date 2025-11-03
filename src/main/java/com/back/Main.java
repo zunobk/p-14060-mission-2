@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 public class Main {
+    static Scanner sc = new Scanner(System.in); // 전역으로 선언
+
     public static void main(String[] args)
     {
         List<App> applist = new ArrayList<>();
@@ -10,7 +12,7 @@ public class Main {
 
         System.out.println("== 명언 앱 ==");
 
-        Scanner sc = new Scanner(System.in);
+//        Scanner sc = new Scanner(System.in);
         String text;
         String author;
 
@@ -35,6 +37,24 @@ public class Main {
             }
             else if (cmd.equals("목록"))
                 printList(applist);
+            else if (cmd.startsWith("삭제"))
+            {
+                // ?를 기준으로 나뉨 [삭제],[id=1]
+                String[] parts = cmd.split("\\?");
+
+                String param = parts[1]; // "id=1"
+                String[] keyValue = param.split("=");
+
+                int targetId = Integer.parseInt(keyValue[1]);
+                boolean deleted = deleteById(applist, 1);
+
+                if (deleted)
+                    System.out.println(targetId + "번 명언이 삭제되었습니다.");
+                else
+                    System.out.println(targetId + "번 명언은 존재하지 않습니다.");
+
+            }
+
         }
 
         sc.close();
@@ -50,6 +70,18 @@ public class Main {
             System.out.println(app.getId() + " / " + app.getAuthor() + " / " + app.getText());
         }
     }
+
+    private static boolean deleteById(List<App> list, int id) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId() == id) {
+                list.remove(i);
+                return true;
+            }
+        }
+        return false; // 못 찾으면 false 반환
+    }
+
+
 }
 class App {
     private int id;
@@ -65,4 +97,11 @@ class App {
     public int getId() { return id; }
     public String getText() { return text; }
     public String getAuthor() { return author; }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 }
