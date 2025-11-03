@@ -65,11 +65,10 @@ public class Main {
                 int targetId = Integer.parseInt(keyValue[1]);
                 boolean deleted = updateById(applist, targetId);
             }
-
         }
-
         sc.close();
     }
+
     private static void printList(List<App> applist)
     {
         System.out.println("번호 / 작가 / 명언");
@@ -81,7 +80,7 @@ public class Main {
             System.out.println(app.getId() + " / " + app.getAuthor() + " / " + app.getText());
         }
     }
-
+    // 삭제
     private static boolean deleteById(List<App> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getId() == id) {
@@ -92,6 +91,7 @@ public class Main {
         return false; // 못 찾으면 false 반환
     }
 
+    // 수정
     private static boolean updateById(List<App> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getId() == id) {
