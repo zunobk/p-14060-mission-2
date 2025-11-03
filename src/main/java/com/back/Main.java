@@ -30,21 +30,39 @@ public class Main {
 
                 // 4단계 완료
                 System.out.println(++id+"번 명언이 등록되었습니다.");
-                applist.add(new App(text, author));
+                applist.add(new App(id, text, author));
 
             }
+            else if (cmd.equals("목록"))
+                printList(applist);
         }
 
         sc.close();
     }
-}
+    private static void printList(List<App> applist)
+    {
+        System.out.println("번호 / 작가 / 명언");
+        System.out.println("----------------------");
 
+        for(int i = applist.size() - 1 ; i>=0; i--)
+        {
+            App app = applist.get(i);
+            System.out.println(app.getId() + " / " + app.getAuthor() + " / " + app.getText());
+        }
+    }
+}
 class App {
+    private int id;
     private String text;
     private String author;
 
-    public App(String text, String author) {
+    public App(int id, String text, String author) {
+        this.id = id;
         this.text = text;
         this.author = author;
     }
+
+    public int getId() { return id; }
+    public String getText() { return text; }
+    public String getAuthor() { return author; }
 }
