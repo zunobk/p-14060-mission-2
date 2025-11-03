@@ -1,8 +1,13 @@
 package com.back;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args)
     {
+        List<App> applist = new ArrayList<>();
+        int id = 0; // 자동 증가
+
         System.out.println("== 명언 앱 ==");
 
         Scanner sc = new Scanner(System.in);
@@ -23,7 +28,9 @@ public class Main {
                 System.out.print("작가 : ");
                 author = sc.nextLine();
 
-                App info = new App(text, author);
+                System.out.println(++id+"번 명언이 등록되었습니다.");
+                applist.add(new App(text, author));
+
             }
         }
 
