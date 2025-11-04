@@ -299,10 +299,8 @@ public class Main {
         String path = DIR + "/data.json";
 
         try (FileWriter fw = new FileWriter(path)) {
-            // 1️⃣ 배열 시작
             fw.write("[\n");
 
-            // 2️⃣ 각 명언을 JSON 형식으로 작성
             for (int i = 0; i < applist.size(); i++) {
                 App app = applist.get(i);
 
@@ -312,14 +310,12 @@ public class Main {
                 fw.write("    \"author\": " + jsonString(app.getAuthor()) + "\n");
                 fw.write("  }");
 
-                // 3️⃣ 마지막 항목이 아니면 쉼표 추가
                 if (i < applist.size() - 1) {
                     fw.write(",");
                 }
                 fw.write("\n");
             }
 
-            // 4️⃣ 배열 끝
             fw.write("]");
 
             System.out.println("data.json 파일의 내용이 갱신되었습니다.");
